@@ -1,9 +1,8 @@
-import { Logo } from './components/Header/components/Logo/Logo';
-
+import { Header } from './components/Header/Header';
 const App = () => {
 	return (
 		<div>
-			<Logo />
+			<Header />
 		</div>
 	);
 };
