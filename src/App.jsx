@@ -1,3 +1,4 @@
+
 import { Logo } from './components/Header/components/Logo/Logo';
 
 const App = () => {
@@ -7,5 +8,6 @@ const App = () => {
 		</div>
 	);
 };
+
 
 export default App;
