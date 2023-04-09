@@ -1,0 +1,14 @@
+@import "src/styles/base";
+
+.button {
+  border-radius: 5px;
+  &.primary {
+    width: 200px;
+    height: 30px;
+    border: 1px solid $dark-second-primary;
+    background: white;
+    color: $dark-second-primary;
+    font-size: 15px;
+  }
+
+}

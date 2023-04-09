@@ -1,28 +1,13 @@
-export const PrimaryButton = ({
-	width,
-	height,
-	backgroundColor,
-	color,
-	border,
-	borderColor,
-	fontSize,
-	buttonText,
-	onClickProp,
-}) => {
+import styles from './Button.module.scss';
+
+export const Button = ({ primary, onClick, children }) => {
+	const combined = [styles.button];
+	if (primary) {
+		combined.push(styles.primary);
+	}
 	return (
-		<button
-			style={{
-				width,
-				height,
-				backgroundColor,
-				color,
-				border,
-				borderColor,
-				fontSize,
-			}}
-			onClick={onClickProp}
-		>
-			{buttonText}
+		<button className={combined.join(' ')} onClick={onClick}>
+			{children}
 		</button>
 	);
 };

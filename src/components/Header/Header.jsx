@@ -1,17 +1,13 @@
-import { PrimaryButton } from '../../common/Button/Button';
+import { Button } from '../../common/Button/Button';
 import { Logo } from './components/Logo/Logo';
+import styles from './test.module.scss';
 
 export const Header = () => {
 	return (
-		<>
-			<Logo />
-			<PrimaryButton
-				buttonText='Logout'
-				width='100px'
-				height='30px'
-				backgroundColor='white'
-				border='2px solid violet'
-			/>
-		</>
+		<div className={styles.header}>
+			<Logo primary />
+			<div className={styles.nick}>Kate</div>
+			<Button primary>Logout</Button>
+		</div>
 	);
 };
