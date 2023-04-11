@@ -1,9 +1,10 @@
-import { Logo } from './components/Header/components/Logo/Logo';
-
+import { Header } from './components/Header/Header';
+import { Courses } from './components/Courses/Courses';
 const App = () => {
 	return (
 		<div>
-			<Logo />
+			<Header />
+			<Courses />
 		</div>
 	);
 };

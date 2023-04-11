@@ -1,0 +1,22 @@
+@import "src/styles/base";
+
+.button {
+  border-radius: 5px;
+  cursor: pointer;
+  &.primary {
+    width: 200px;
+    height: 30px;
+    border: 1px solid $dark-second-primary;
+    background: white;
+    color: $dark-second-primary;
+    font-size: 15px;
+  }
+  &.secondary {
+    width: 150px;
+    height: 25px;
+    border: 1px solid $dark-primary;
+    background: white;
+    color: $dark-primary;
+    font-size: 10px;
+  }
+}
