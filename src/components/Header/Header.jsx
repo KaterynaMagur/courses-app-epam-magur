@@ -1,7 +1,7 @@
 import { Button } from '../../common/Button/Button';
 import { Logo } from './components/Logo/Logo';
 
-import styles from './test.module.scss';
+import styles from './Header.module.scss';
 
 const NickName = 'Kate';
 
