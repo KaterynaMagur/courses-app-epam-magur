@@ -1,1 +1,22 @@
+body {
+  background: #fcfcfc;
+  font: 16px/24px 'Roboto', sans-serif;
+}
 
+.typography {
+  &--bold {
+    font-weight: 600;
+  }
+  &--small {
+    font-size: 14px;
+    line-height: 18px;
+  }
+  &--large {
+    font-size: 18px;
+    line-height: 27px;
+  }
+  &--extra-large {
+    font-size: 25px;
+    line-height: 37px;
+  }
+}

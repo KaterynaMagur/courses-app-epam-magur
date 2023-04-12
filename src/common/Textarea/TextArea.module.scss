@@ -1,9 +1,9 @@
 @import "src/styles/base";
 
-.input {
+.textArea {
   min-width: 400px;
-  min-height: 30px;
-  border: 1px solid $primary;
+  min-height: 100px;
+  border: 1px solid $second-primary;
   border-radius: 5px;
   box-shadow: lightgrey;
   font-size: 16px;
@@ -13,11 +13,7 @@
   }
 }
 
-.label {
-
-}
-
-.inputDiv {
+.divTextArea {
   display: flex;
   flex-direction: column;
 }
