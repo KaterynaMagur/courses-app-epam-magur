@@ -3,8 +3,19 @@ import { Button } from '../../common/Button/Button';
 import { TextArea } from '../../common/Textarea/TextArea';
 import { mockedAuthorsList } from '../../constants';
 import styles from './CreateCourse.module.scss';
+import { useState } from 'react';
 
 export const CreateCourse = () => {
+	const [selectedAuthors, setSelectedAuthors] = useState([]);
+
+	const addAuthor = (id) => {
+		setSelectedAuthors([...selectedAuthors, id]);
+	};
+
+	const deleteAuthor = (id) => {
+		setSelectedAuthors(selectedAuthors.filter((author) => author !== id));
+	};
+
 	return (
 		<div className={styles.main}>
 			<div className={styles.inputLine}>
@@ -43,19 +54,36 @@ export const CreateCourse = () => {
 					<div>
 						<h3 className={styles.h3}>Authors</h3>
 						<div>
-							{mockedAuthorsList.map((authors) => (
-								<div className={styles.addAuthorLines}>
-									<p>{authors.name}</p>
-									<div className={styles.buttonDiv}>
-										<Button secondary>Add author</Button>
+							{mockedAuthorsList
+								.filter((author) => !selectedAuthors.includes(author.id))
+								.map((author) => (
+									<div className={styles.addAuthorLines} key={author.id}>
+										<p>{author.name}</p>
+										<div className={styles.buttonDiv}>
+											<Button secondary onClick={() => addAuthor(author.id)}>
+												Add Author
+											</Button>
+										</div>
 									</div>
-								</div>
-							))}
+								))}
 						</div>
 					</div>
 					<div>
 						<h3 className={styles.h3}>Course Authors</h3>
-						<div>Author list is empty</div>
+						<div>
+							{mockedAuthorsList
+								.filter((author) => selectedAuthors.includes(author.id))
+								.map((author) => (
+									<div className={styles.addAuthorLines} key={author.id}>
+										<p>{author.name}</p>
+										<div className={styles.buttonDiv}>
+											<Button secondary onClick={() => deleteAuthor(author.id)}>
+												Delete Author
+											</Button>
+										</div>
+									</div>
+								))}
+						</div>
 					</div>
 				</div>
 			</div>
