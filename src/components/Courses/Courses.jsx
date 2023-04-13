@@ -1,11 +1,10 @@
-import { mockedCoursesList } from '../../constants';
 import { CourseCard } from './components/CourseCard/CourseCard';
 import { Button } from '../../common/Button/Button';
 import styles from './Courses.module.scss';
 import { SearchBar } from './components/SearchBar/SearchBar';
 import { useState } from 'react';
 
-export const Courses = () => {
+export const Courses = ({ authorsList, coursesList }) => {
 	const [search, setSearch] = useState('');
 
 	return (
@@ -14,7 +13,7 @@ export const Courses = () => {
 				<SearchBar onSearch={setSearch} />
 				<Button primary>Add new course</Button>
 			</div>
-			{mockedCoursesList
+			{coursesList
 				.filter(
 					(course) =>
 						course.title.toLowerCase().search(search) !== -1 ||
@@ -22,7 +21,11 @@ export const Courses = () => {
 				)
 
 				.map((course) => (
-					<CourseCard course={course} key={course.id} />
+					<CourseCard
+						authorsList={authorsList}
+						course={course}
+						key={course.id}
+					/>
 				))}
 		</div>
 	);

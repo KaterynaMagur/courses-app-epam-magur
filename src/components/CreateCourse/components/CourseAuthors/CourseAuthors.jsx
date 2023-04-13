@@ -1,13 +1,16 @@
 import styles from '../../CreateCourse.module.scss';
-import { mockedAuthorsList } from '../../../../constants';
 import { Button } from '../../../../common/Button/Button';
 
-export const CourseAuthors = ({ selectedAuthors, deleteAuthor }) => {
+export const CourseAuthors = ({
+	selectedAuthors,
+	deleteAuthor,
+	authorsList,
+}) => {
 	return (
 		<div>
 			<h3 className={styles.h3}>Course Authors</h3>
 			<div>
-				{mockedAuthorsList
+				{authorsList
 					.filter((author) => selectedAuthors.includes(author.id))
 					.map((author) => (
 						<div className={styles.addAuthorLines} key={author.id}>

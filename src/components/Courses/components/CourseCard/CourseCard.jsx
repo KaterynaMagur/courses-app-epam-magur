@@ -1,15 +1,14 @@
 import { Button } from '../../../../common/Button/Button';
-import { mockedAuthorsList } from '../../../../constants';
 import { useMemo } from 'react';
 import styles from './CourseCard.module.scss';
 
-export const CourseCard = ({ course }) => {
+export const CourseCard = ({ course, authorsList }) => {
 	const authors = useMemo(() => {
-		return mockedAuthorsList
+		return authorsList
 			.filter((author) => course.authors.includes(author.id))
 			.map((author) => author.name)
 			.join(', ');
-	}, [course]);
+	}, [course, authorsList]);
 
 	return (
 		<div>

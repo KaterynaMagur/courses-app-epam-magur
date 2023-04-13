@@ -5,8 +5,9 @@ import styles from './CreateCourse.module.scss';
 import { useState } from 'react';
 import { Authors } from './components/Authors/Authors';
 import { CourseAuthors } from './components/CourseAuthors/CourseAuthors';
+import { AddAuthor } from './components/AddAuthor/AddAuthor';
 
-export const CreateCourse = () => {
+export const CreateCourse = ({ authorsList, createNewAuthor }) => {
 	const [selectedAuthors, setSelectedAuthors] = useState([]);
 
 	const addAuthor = (id) => {
@@ -26,16 +27,7 @@ export const CreateCourse = () => {
 			<TextArea labelText='Description' placeholderText='Enter description' />
 			<div className={styles.row}>
 				<div className={styles.column}>
-					<div className={styles.addAuthorDiv}>
-						<h3 className={styles.h3}>Add author</h3>
-						<Input
-							labelText='Author name'
-							placeholderText='Enter Author name'
-						/>
-						<div className={styles.buttonDiv}>
-							<Button secondary>Create author</Button>
-						</div>
-					</div>
+					<AddAuthor createNewAuthor={createNewAuthor} />
 					<div className={styles.durationDiv}>
 						<h3 className={styles.h3}>Duration</h3>
 						<Input
@@ -52,8 +44,13 @@ export const CreateCourse = () => {
 					</div>
 				</div>
 				<div className={styles.column}>
-					<Authors addAuthor={addAuthor} selectedAuthors={selectedAuthors} />
+					<Authors
+						authorsList={authorsList}
+						addAuthor={addAuthor}
+						selectedAuthors={selectedAuthors}
+					/>
 					<CourseAuthors
+						authorsList={authorsList}
 						selectedAuthors={selectedAuthors}
 						deleteAuthor={deleteAuthor}
 					/>
