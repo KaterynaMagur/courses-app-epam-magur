@@ -1,27 +1,27 @@
 @import "src/styles/base";
 
 .card {
-  padding: 10px;
+  padding: 1rem;
   display: grid;
+  gap: 2rem;
   grid-template-columns: 2fr 1fr;
-  border: 1px solid $dark-second-primary;
+  border: 1px solid #ececec;
+  background: #fff;
   margin: 20px 0;
-  box-shadow:
-          inset 0 -3em 3em rgba(0,0,0,0.1),
-          0 0  0 2px rgb(255,255,255)
+  border-radius: 6px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+  min-height: 150px;
 }
 
 .h2 {
   color: $dark-second-primary;
+  margin: 0 0 1rem;
 }
 
-.boldText {
-  font-weight: bold;
-}
 
 .description {
   text-align: left;
-  font-size: small;
+  font-size: 0.8rem;
   font-weight: normal;
 }
 
@@ -31,16 +31,18 @@
 }
 
 .rightBlock {
-  padding: 5px;
+  margin-top: .5rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: left;
   gap: 5px;
 }
 
 .button {
+  margin-top: auto;
   display: flex;
   justify-content: center;
-  padding: 20px;
 }
+
+

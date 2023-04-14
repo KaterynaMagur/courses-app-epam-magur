@@ -1,15 +1,14 @@
 import { Button } from '../../../../common/Button/Button';
-import { mockedAuthorsList } from '../../../../constants';
 import { useMemo } from 'react';
 import styles from './CourseCard.module.scss';
 
-export const CourseCard = ({ course }) => {
+export const CourseCard = ({ course, authorsList }) => {
 	const authors = useMemo(() => {
-		return mockedAuthorsList
+		return authorsList
 			.filter((author) => course.authors.includes(author.id))
 			.map((author) => author.name)
 			.join(', ');
-	}, [course]);
+	}, [course, authorsList]);
 
 	return (
 		<div>
@@ -20,19 +19,21 @@ export const CourseCard = ({ course }) => {
 				</div>
 				<div className={styles.rightBlock}>
 					<div>
-						<span className={styles.boldText}>Authors: </span>
+						<span className='typography--bold'>Authors: </span>
 						{authors}
 					</div>
 					<div>
-						<span className={styles.boldText}>Duration: </span>
+						<span className='typography--bold'>Duration: </span>
 						{course.duration}
 					</div>
 					<div>
-						<span className={styles.boldText}>Created: </span>
+						<span className='typography--bold'>Created: </span>
 						{course.creationDate}
 					</div>
 					<div className={styles.button}>
-						<Button secondary>Show course</Button>
+						<Button secondary small>
+							Show course
+						</Button>
 					</div>
 				</div>
 			</div>
