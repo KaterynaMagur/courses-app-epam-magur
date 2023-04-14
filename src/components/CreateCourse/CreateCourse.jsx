@@ -9,6 +9,7 @@ import { AddAuthor } from './components/AddAuthor/AddAuthor';
 
 export const CreateCourse = ({ authorsList, createNewAuthor }) => {
 	const [selectedAuthors, setSelectedAuthors] = useState([]);
+	const [min, setMinutes] = useState(0);
 
 	const addAuthor = (id) => {
 		setSelectedAuthors([...selectedAuthors, id]);
@@ -17,6 +18,13 @@ export const CreateCourse = ({ authorsList, createNewAuthor }) => {
 	const deleteAuthor = (id) => {
 		setSelectedAuthors(selectedAuthors.filter((author) => author !== id));
 	};
+
+	const handleInputChange = ({ target: { value } }) => {
+		setMinutes(value);
+	};
+	function padTo2Digits(num) {
+		return num.toString().padStart(2, '0');
+	}
 
 	return (
 		<div className={styles.main}>
@@ -31,13 +39,16 @@ export const CreateCourse = ({ authorsList, createNewAuthor }) => {
 					<div className={styles.durationDiv}>
 						<h3 className={styles.h3}>Duration</h3>
 						<Input
+							min='0'
+							type='number'
 							labelText='Duration'
 							placeholderText='Enter duration in minutes'
+							onChange={handleInputChange}
 						/>
 						<div className={styles.durationCounter}>
 							Duration:{' '}
 							<span className='typography--bold typography--extra-large'>
-								00:00
+								{padTo2Digits(Math.floor(min / 60))} : {padTo2Digits(min % 60)}
 							</span>{' '}
 							hours
 						</div>
