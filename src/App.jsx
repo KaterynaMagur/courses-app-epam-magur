@@ -8,6 +8,7 @@ import { mockedAuthorsList, mockedCoursesList } from './constants';
 const App = () => {
 	const [authorsList, setAuthors] = useState(mockedAuthorsList);
 	const [coursesList, setCourses] = useState(mockedCoursesList);
+	const [isNewCourseOpen, setNewCourseOpen] = useState(false);
 
 	const createNewAuthor = (name) => {
 		const author = {
@@ -18,14 +19,36 @@ const App = () => {
 		setAuthors([...authorsList, author]);
 	};
 
+	const createNewCourse = (title, description, duration, authors) => {
+		const course = {
+			id: uuidv4(),
+			title: title,
+			description: description,
+			creationDate: new Date().toLocaleDateString('en-US'),
+			duration: duration,
+			authors: authors,
+		};
+
+		setCourses([...coursesList, course]);
+		setNewCourseOpen(false);
+	};
+
 	return (
 		<div>
 			<Header />
-			<Courses authorsList={authorsList} coursesList={coursesList} />
-			<CreateCourse
-				createNewAuthor={createNewAuthor}
-				authorsList={authorsList}
-			/>
+			{isNewCourseOpen ? (
+				<CreateCourse
+					createNewAuthor={createNewAuthor}
+					createNewCourse={createNewCourse}
+					authorsList={authorsList}
+				/>
+			) : (
+				<Courses
+					onAddNewCourse={() => setNewCourseOpen(true)}
+					authorsList={authorsList}
+					coursesList={coursesList}
+				/>
+			)}
 		</div>
 	);
 };

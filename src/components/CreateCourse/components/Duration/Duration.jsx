@@ -1,11 +1,9 @@
 import styles from '../../CreateCourse.module.scss';
 import { Input } from '../../../../common/Input/Input';
-import { useState } from 'react';
 
-export const Duration = () => {
-	const [min, setMinutes] = useState(0);
+export const Duration = ({ onMinutesChange, minutes }) => {
 	const handleInputChange = ({ target: { value } }) => {
-		setMinutes(value);
+		onMinutesChange(Number(value));
 	};
 	function padTo2Digits(num) {
 		return num.toString().padStart(2, '0');
@@ -19,12 +17,14 @@ export const Duration = () => {
 				type='number'
 				labelText='Duration'
 				placeholderText='Enter duration in minutes'
+				value={minutes}
 				onChange={handleInputChange}
 			/>
 			<div className={styles.durationCounter}>
 				Duration:{' '}
 				<span className='typography--bold typography--extra-large'>
-					{padTo2Digits(Math.floor(min / 60))} : {padTo2Digits(min % 60)}
+					{padTo2Digits(Math.floor(minutes / 60))} :{' '}
+					{padTo2Digits(minutes % 60)}
 				</span>{' '}
 				hours
 			</div>

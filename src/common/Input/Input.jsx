@@ -13,12 +13,14 @@ export const Input = ({
 	labelText,
 	placeholderText,
 	onChange,
+	value,
 }) => {
 	const id = useMemo(() => getId(name), [name]);
 	return (
 		<div className={styles.inputDiv}>
 			<label htmlFor={id}>{labelText}</label>
 			<input
+				value={value}
 				min={min}
 				type={type}
 				id={id}
