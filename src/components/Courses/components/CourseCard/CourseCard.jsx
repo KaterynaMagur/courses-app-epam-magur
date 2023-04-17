@@ -13,12 +13,12 @@ export const CourseCard = ({ course, authorsList }) => {
 	return (
 		<div>
 			<div className={styles.card}>
-				<div className={styles.leftBlock}>
+				<div>
 					<h2 className={styles.h2}>{course.title}</h2>
 					<div className={styles.description}>{course.description}</div>
 				</div>
 				<div className={styles.rightBlock}>
-					<div>
+					<div className={styles.threeDots}>
 						<span className='typography--bold'>Authors: </span>
 						{authors}
 					</div>

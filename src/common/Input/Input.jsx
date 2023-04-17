@@ -6,12 +6,23 @@ const getId = (name = 'no-name') => {
 	return `${name}_${id}`;
 };
 
-export const Input = ({ name, labelText, placeholderText, onChange }) => {
+export const Input = ({
+	min,
+	type,
+	name,
+	labelText,
+	placeholderText,
+	onChange,
+	value,
+}) => {
 	const id = useMemo(() => getId(name), [name]);
 	return (
 		<div className={styles.inputDiv}>
 			<label htmlFor={id}>{labelText}</label>
 			<input
+				value={value}
+				min={min}
+				type={type}
 				id={id}
 				name={name}
 				className={styles.input}

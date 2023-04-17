@@ -4,14 +4,16 @@ import styles from './Courses.module.scss';
 import { SearchBar } from './components/SearchBar/SearchBar';
 import { useState } from 'react';
 
-export const Courses = ({ authorsList, coursesList }) => {
+export const Courses = ({ onAddNewCourse, authorsList, coursesList }) => {
 	const [search, setSearch] = useState('');
 
 	return (
 		<div className={styles.mainContent}>
 			<div className={styles.controlDiv}>
 				<SearchBar onSearch={setSearch} />
-				<Button primary>Add new course</Button>
+				<Button primary onClick={onAddNewCourse}>
+					Add new course
+				</Button>
 			</div>
 			{coursesList
 				.filter(
