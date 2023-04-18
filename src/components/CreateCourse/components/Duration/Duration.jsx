@@ -1,13 +1,13 @@
 import styles from '../../CreateCourse.module.scss';
+
 import { Input } from '../../../../common/Input/Input';
+
+import { padTo2Digits } from '../../../../helpers/pipeDuration';
 
 export const Duration = ({ onMinutesChange, minutes }) => {
 	const handleInputChange = ({ target: { value } }) => {
 		onMinutesChange(Number(value));
 	};
-	function padTo2Digits(num) {
-		return num.toString().padStart(2, '0');
-	}
 
 	return (
 		<div className={styles.durationDiv}>
