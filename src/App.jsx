@@ -1,9 +1,14 @@
 import { v4 as uuidv4 } from 'uuid';
+
 import { Header } from './components/Header/Header';
 import { Courses } from './components/Courses/Courses';
 import { CreateCourse } from './components/CreateCourse/CreateCourse';
+
 import { useState } from 'react';
+
 import { mockedAuthorsList, mockedCoursesList } from './constants';
+
+import { getCurrentDate } from './helpers/dateGeneratop';
 
 const App = () => {
 	const [authorsList, setAuthors] = useState(mockedAuthorsList);
@@ -24,7 +29,7 @@ const App = () => {
 			id: uuidv4(),
 			title: title,
 			description: description,
-			creationDate: new Date().toLocaleDateString('en-US'),
+			creationDate: getCurrentDate(),
 			duration: duration,
 			authors: authors,
 		};
