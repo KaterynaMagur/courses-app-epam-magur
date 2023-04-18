@@ -4,6 +4,8 @@ import { Input } from '../../../../common/Input/Input';
 
 import { padTo2Digits } from '../../../../helpers/pipeDuration';
 
+const MINUTES_ONE_HOUR = 60;
+
 export const Duration = ({ onMinutesChange, minutes }) => {
 	const handleInputChange = ({ target: { value } }) => {
 		onMinutesChange(Number(value));
@@ -23,8 +25,8 @@ export const Duration = ({ onMinutesChange, minutes }) => {
 			<div className={styles.durationCounter}>
 				Duration:{' '}
 				<span className='typography--bold typography--extra-large'>
-					{padTo2Digits(Math.floor(minutes / 60))} :{' '}
-					{padTo2Digits(minutes % 60)}
+					{padTo2Digits(Math.floor(minutes / MINUTES_ONE_HOUR))} :{' '}
+					{padTo2Digits(minutes % MINUTES_ONE_HOUR)}
 				</span>{' '}
 				hours
 			</div>

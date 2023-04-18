@@ -3,13 +3,13 @@ import { Logo } from './components/Logo/Logo';
 
 import styles from './Header.module.scss';
 
-const NickName = 'Kate';
+const NICK_NAME = 'Kate';
 
 export const Header = () => {
 	return (
 		<div className={styles.header}>
 			<Logo primary />
-			<div className={styles.nick}>{NickName}</div>
+			<div className={styles.nick}>{NICK_NAME}</div>
 			<Button primary>Logout</Button>
 		</div>
 	);
