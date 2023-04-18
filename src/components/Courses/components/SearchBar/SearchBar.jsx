@@ -9,6 +9,9 @@ export const SearchBar = ({ onSearch }) => {
 		onSearch(search);
 	};
 	const handleInputChange = ({ target: { value } }) => {
+		if (search && !value) {
+			onSearch('');
+		}
 		setSearch(value);
 	};
 	return (
