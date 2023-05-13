@@ -42,20 +42,29 @@ const App = () => {
 
 	return (
 		<div>
-			<Header />
-			{isNewCourseOpen ? (
-				<CreateCourse
-					createNewAuthor={createNewAuthor}
-					createNewCourse={createNewCourse}
-					authorsList={authorsList}
-				/>
-			) : (
-				<Courses
-					onAddNewCourse={() => setNewCourseOpen(true)}
-					authorsList={authorsList}
-					coursesList={coursesList}
-				/>
-			)}
+			<Routes>
+				<Route
+					path='/'
+					element={
+						<>
+							<Header />
+							{isNewCourseOpen ? (
+								<CreateCourse
+									createNewAuthor={createNewAuthor}
+									createNewCourse={createNewCourse}
+									authorsList={authorsList}
+								/>
+							) : (
+								<Courses
+									onAddNewCourse={() => setNewCourseOpen(true)}
+									authorsList={authorsList}
+									coursesList={coursesList}
+								/>
+							)}
+						</>
+					}
+				></Route>
+			</Routes>
 		</div>
 	);
 };
