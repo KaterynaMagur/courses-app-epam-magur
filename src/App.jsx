@@ -12,6 +12,8 @@ import { getCurrentDate } from './helpers/dateGeneratop';
 
 import { Route, Routes } from 'react-router-dom';
 import { Registration } from './components/Registration/Registration';
+import { Login } from './components/Login/Login';
+import { CourseInfo } from './components/CourseInfo/CourseInfo';
 
 const App = () => {
 	const [authorsList, setAuthors] = useState(mockedAuthorsList);
@@ -43,29 +45,31 @@ const App = () => {
 
 	return (
 		<div>
+			<Header />
 			<Routes>
 				<Route
-					path='/'
+					path='/courses'
 					element={
-						<>
-							<Header />
-							{isNewCourseOpen ? (
-								<CreateCourse
-									createNewAuthor={createNewAuthor}
-									createNewCourse={createNewCourse}
-									authorsList={authorsList}
-								/>
-							) : (
-								<Courses
-									onAddNewCourse={() => setNewCourseOpen(true)}
-									authorsList={authorsList}
-									coursesList={coursesList}
-								/>
-							)}
-						</>
+						<Courses
+							onAddNewCourse={() => setNewCourseOpen(true)}
+							authorsList={authorsList}
+							coursesList={coursesList}
+						/>
+					}
+				></Route>
+				<Route
+					path='/courses/add'
+					element={
+						<CreateCourse
+							createNewAuthor={createNewAuthor}
+							createNewCourse={createNewCourse}
+							authorsList={authorsList}
+						/>
 					}
 				></Route>
 				<Route path='/registration' element={<Registration />}></Route>
+				<Route path='/login' element={<Login />}></Route>
+				<Route path='/courses/:courseId' element={<CourseInfo />}></Route>
 			</Routes>
 		</div>
 	);
