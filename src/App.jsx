@@ -11,6 +11,7 @@ import { mockedAuthorsList, mockedCoursesList } from './constants';
 import { getCurrentDate } from './helpers/dateGeneratop';
 
 import { Route, Routes } from 'react-router-dom';
+import { Registration } from './components/Registration/Registration';
 
 const App = () => {
 	const [authorsList, setAuthors] = useState(mockedAuthorsList);
@@ -64,6 +65,7 @@ const App = () => {
 						</>
 					}
 				></Route>
+				<Route path='/registration' element={<Registration />}></Route>
 			</Routes>
 		</div>
 	);
