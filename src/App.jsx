@@ -10,6 +10,8 @@ import { mockedAuthorsList, mockedCoursesList } from './constants';
 
 import { getCurrentDate } from './helpers/dateGeneratop';
 
+import { Route, Routes } from 'react-router-dom';
+
 const App = () => {
 	const [authorsList, setAuthors] = useState(mockedAuthorsList);
 	const [coursesList, setCourses] = useState(mockedCoursesList);
