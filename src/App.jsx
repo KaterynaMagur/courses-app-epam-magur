@@ -17,6 +17,12 @@ import { CourseInfo } from './components/CourseInfo/CourseInfo';
 import axios from 'axios';
 
 axios.defaults.baseURL = 'http://localhost:4000';
+axios.interceptors.request.use((config) => {
+	if (!['/login', '/register'].includes(config.url)) {
+		config.headers.Authorization = localStorage.getItem('token') || '';
+	}
+	return config;
+});
 
 const App = () => {
 	const [authorsList, setAuthors] = useState(mockedAuthorsList);

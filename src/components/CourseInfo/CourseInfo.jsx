@@ -3,7 +3,7 @@ import { Button } from '../../common/Button/Button';
 export const CourseInfo = () => {
 	return (
 		<div>
-			<Button>Back to courses</Button>
+			<Button primary> &larr; Back to courses</Button>
 			<h2>Course Name</h2>
 			<div>Course info</div>
 			<div>
