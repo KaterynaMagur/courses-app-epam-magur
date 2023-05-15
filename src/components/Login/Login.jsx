@@ -31,6 +31,7 @@ export const Login = () => {
 			})
 			.then((res) => {
 				localStorage.setItem('token', JSON.stringify(res.data.result));
+				localStorage.setItem('name', JSON.stringify(res.data.user.name));
 				navigate('/courses');
 			})
 			.catch((err) => {
