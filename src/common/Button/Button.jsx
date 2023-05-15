@@ -1,6 +1,13 @@
 import styles from './Button.module.scss';
 
-export const Button = ({ primary, secondary, small, onClick, children }) => {
+export const Button = ({
+	primary,
+	secondary,
+	small,
+	onClick,
+	children,
+	type,
+}) => {
 	const combined = [styles.button];
 	if (primary) {
 		combined.push(styles.primary);
@@ -12,7 +19,7 @@ export const Button = ({ primary, secondary, small, onClick, children }) => {
 		combined.push(styles.small);
 	}
 	return (
-		<button className={combined.join(' ')} onClick={onClick}>
+		<button className={combined.join(' ')} onClick={onClick} type={type}>
 			{children}
 		</button>
 	);
