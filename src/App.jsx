@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Header } from './components/Header/Header';
 import { Courses } from './components/Courses/Courses';
 import { CreateCourse } from './components/CreateCourse/CreateCourse';
+import { DefaultPage } from './components/DefaultPage/DefaultPage';
 
 import { useState } from 'react';
 
@@ -79,6 +80,7 @@ const App = () => {
 				<Route path='/registration' element={<Registration />}></Route>
 				<Route path='/login' element={<Login />}></Route>
 				<Route path='/courses/:courseId' element={<CourseInfo />}></Route>
+				<Route path='*' element={<DefaultPage />} />
 			</Routes>
 		</div>
 	);
