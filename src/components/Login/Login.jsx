@@ -2,7 +2,7 @@ import { Input } from '../../common/Input/Input';
 import { Button } from '../../common/Button/Button';
 import styles from './Login.module.scss';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const initialState = {
@@ -71,7 +71,8 @@ export const Login = () => {
 					</Button>
 				</div>
 				<div>
-					If you not have an account you can <a>Registration</a>
+					If you not have an account you can{' '}
+					<Link to='/registration'>Registration</Link>
 				</div>
 			</form>
 		</div>

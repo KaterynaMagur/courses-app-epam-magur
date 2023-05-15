@@ -1,6 +1,7 @@
 import { Button } from '../../../../common/Button/Button';
 import { useMemo } from 'react';
 import styles from './CourseCard.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 export const CourseCard = ({ course, authorsList }) => {
 	const authors = useMemo(() => {
@@ -9,6 +10,12 @@ export const CourseCard = ({ course, authorsList }) => {
 			.map((author) => author.name)
 			.join(', ');
 	}, [course, authorsList]);
+
+	const navigate = useNavigate();
+
+	const showCourse = () => {
+		navigate(course.id);
+	};
 
 	return (
 		<div>
@@ -31,7 +38,7 @@ export const CourseCard = ({ course, authorsList }) => {
 						{course.creationDate}
 					</div>
 					<div className={styles.button}>
-						<Button secondary small>
+						<Button secondary small onClick={showCourse}>
 							Show course
 						</Button>
 					</div>

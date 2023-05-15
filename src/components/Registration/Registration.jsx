@@ -3,7 +3,7 @@ import { Button } from '../../common/Button/Button';
 
 import styles from './Registration.module.scss';
 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
 
@@ -79,7 +79,7 @@ export const Registration = () => {
 					</Button>
 				</div>
 				<div className={styles.center}>
-					If you have an account you can <a>Login</a>
+					If you have an account you can <Link to='/login'>Login</Link>
 				</div>
 			</form>
 		</div>
