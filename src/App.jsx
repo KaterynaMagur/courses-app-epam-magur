@@ -14,6 +14,9 @@ import { Route, Routes } from 'react-router-dom';
 import { Registration } from './components/Registration/Registration';
 import { Login } from './components/Login/Login';
 import { CourseInfo } from './components/CourseInfo/CourseInfo';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'http://localhost:4000';
 
 const App = () => {
 	const [authorsList, setAuthors] = useState(mockedAuthorsList);
