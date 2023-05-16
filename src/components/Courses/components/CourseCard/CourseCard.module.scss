@@ -1,0 +1,51 @@
+@import "src/styles/base";
+
+.card {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  border: 1px solid #ececec;
+  background: #fff;
+  margin: 20px 0;
+  border-radius: 6px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+  min-height: 150px;
+}
+
+.h2 {
+  color: $dark-second-primary;
+  margin: 0 0 1rem;
+}
+
+
+.description {
+  text-align: left;
+  font-size: 0.8rem;
+  font-weight: normal;
+}
+
+
+.rightBlock {
+  margin-top: .5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
+  gap: 5px;
+}
+
+.threeDots {
+  width: 300px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.button {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+}
+
+

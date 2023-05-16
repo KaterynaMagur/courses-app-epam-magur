@@ -1,4 +1,4 @@
-import styles from './Input.module.scss';
+import styles from './TextArea.module.scss';
 import { useMemo } from 'react';
 
 const getId = (name = 'no-name') => {
@@ -6,9 +6,7 @@ const getId = (name = 'no-name') => {
 	return `${name}_${id}`;
 };
 
-export const Input = ({
-	min,
-	type,
+export const TextArea = ({
 	name,
 	labelText,
 	placeholderText,
@@ -17,15 +15,13 @@ export const Input = ({
 }) => {
 	const id = useMemo(() => getId(name), [name]);
 	return (
-		<div className={styles.inputDiv}>
+		<div className={styles.divTextArea}>
 			<label htmlFor={id}>{labelText}</label>
-			<input
-				value={value}
-				min={min}
-				type={type}
+			<textarea
 				id={id}
+				value={value}
 				name={name}
-				className={styles.input}
+				className={styles.textArea}
 				placeholder={placeholderText}
 				onChange={onChange}
 			/>

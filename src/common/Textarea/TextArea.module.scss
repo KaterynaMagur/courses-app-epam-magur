@@ -1,0 +1,19 @@
+@import "src/styles/base";
+
+.textArea {
+  min-width: 400px;
+  min-height: 100px;
+  border: 1px solid $second-primary;
+  border-radius: 5px;
+  box-shadow: lightgrey;
+  font-size: 16px;
+  &::placeholder {
+    padding: 0.8rem;
+    color: darkgrey;
+  }
+}
+
+.divTextArea {
+  display: flex;
+  flex-direction: column;
+}

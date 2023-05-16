@@ -1,0 +1,21 @@
+@import "src/styles/base";
+
+.mainContent {
+  padding: 30px;
+  border: 1px solid $primary;
+  margin: 20px 0;
+}
+
+.controlDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.coursesDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+

@@ -1,0 +1,12 @@
+@import "src/styles/base";
+
+.logo {
+  &.primary {
+    margin-right: auto;
+    width: 150px;
+  }
+  &.secondary {
+    width: 50px;
+  }
+
+}

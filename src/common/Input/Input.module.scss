@@ -1,0 +1,23 @@
+@import "src/styles/base";
+
+.input {
+  min-width: 400px;
+  min-height: 30px;
+  border: 1px solid $primary;
+  border-radius: 5px;
+  box-shadow: lightgrey;
+  font-size: 16px;
+  &::placeholder {
+    padding: 0.8rem;
+    color: darkgrey;
+  }
+}
+
+.label {
+
+}
+
+.inputDiv {
+  display: flex;
+  flex-direction: column;
+}
