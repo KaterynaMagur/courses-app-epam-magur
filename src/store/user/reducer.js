@@ -15,6 +15,7 @@ export const userReducer = createReducer(initialState, (builder) => {
 			return { ...state, ...action.payload, isAuth: true };
 		})
 		.addCase(logUserOut, (state, action) => {
+			localStorage.clear();
 			return { ...initialState };
 		});
 });
