@@ -4,6 +4,7 @@ export const Button = ({
 	primary,
 	secondary,
 	small,
+	superSmall,
 	disabled,
 	onClick,
 	children,
@@ -18,6 +19,9 @@ export const Button = ({
 	}
 	if (small) {
 		combined.push(styles.small);
+	}
+	if (superSmall) {
+		combined.push(styles.superSmall);
 	}
 	return (
 		<button

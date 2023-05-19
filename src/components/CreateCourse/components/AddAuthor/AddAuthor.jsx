@@ -4,7 +4,12 @@ import { Input } from '../../../../common/Input/Input';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { api } from '../../../../servisces';
-import { addAuthor } from '../../../../store/authors/actionCreators';
+import {
+	addAuthor,
+	setAuthors,
+} from '../../../../store/authors/actionCreators';
+
+import { v4 as uuidv4 } from 'uuid';
 
 export const AddAuthor = () => {
 	const [newAuthorName, setNewAuthorName] = useState('');
@@ -29,6 +34,10 @@ export const AddAuthor = () => {
 			});
 	};
 
+	const mockHandleAddUser = () => {
+		dispatch(addAuthor({ id: uuidv4(), name: newAuthorName }));
+	};
+
 	return (
 		<div className={styles.addAuthorDiv}>
 			<h3 className={styles.h3}>Add author</h3>
@@ -40,7 +49,7 @@ export const AddAuthor = () => {
 			<div className={styles.buttonDiv}>
 				<Button
 					disabled={loading || !newAuthorName}
-					onClick={handleAddAuthor}
+					onClick={mockHandleAddUser}
 					secondary
 				>
 					Create author

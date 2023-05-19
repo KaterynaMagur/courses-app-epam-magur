@@ -48,4 +48,11 @@
   justify-content: center;
 }
 
+.buttonsWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
 
