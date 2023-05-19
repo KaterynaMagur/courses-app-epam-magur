@@ -3,20 +3,20 @@ import { Logo } from './components/Logo/Logo';
 
 import styles from './Header.module.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { logUserOut } from '../../store/user/actionCreators';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUser } from '../../store';
 
 export const Header = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
-	const nickName = () => {
-		if (localStorage.getItem('name')) {
-			return localStorage.getItem('name').slice(1, -1);
-		}
-		return '';
-	};
+	const dispatch = useDispatch();
+
+	const user = useSelector(selectUser);
 
 	const logout = () => {
-		localStorage.removeItem('token');
-		localStorage.removeItem('name');
+		localStorage.clear();
+		dispatch(logUserOut());
 		navigate('/login');
 	};
 
@@ -28,7 +28,7 @@ export const Header = () => {
 			<Logo primary />
 			{showLogout ? (
 				<div className={styles.rightPart}>
-					<div className={styles.nick}>{nickName()}</div>
+					<div className={styles.nick}>{user.name}</div>
 					<Button primary onClick={logout}>
 						Logout
 					</Button>

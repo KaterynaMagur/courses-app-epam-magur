@@ -8,18 +8,19 @@ import { CourseAuthors } from './components/CourseAuthors/CourseAuthors';
 import { AddAuthor } from './components/AddAuthor/AddAuthor';
 import { Duration } from './components/Duration/Duration';
 import { useNavigate } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
+import { addNewCourse } from '../../store/courses/actionCreators';
+import { useDispatch } from 'react-redux';
+import { getCurrentDate } from '../../helpers/dateGeneratop';
 
-export const CreateCourse = ({
-	authorsList,
-	createNewAuthor,
-	createNewCourse,
-}) => {
+export const CreateCourse = () => {
 	const [selectedAuthors, setSelectedAuthors] = useState([]);
 	const [minutes, setMinutes] = useState(0);
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
 
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const clearState = useCallback(() => {
 		setTitle('');
@@ -51,7 +52,17 @@ export const CreateCourse = ({
 		if (!minutes || !title || !description || !selectedAuthors.length) {
 			return alert('Please, fill in all fields');
 		}
-		createNewCourse(title, description, minutes, selectedAuthors);
+		// createNewCourse(title, description, minutes, selectedAuthors);
+		dispatch(
+			addNewCourse({
+				id: uuidv4(),
+				title,
+				description,
+				creationDate: getCurrentDate(),
+				authors: selectedAuthors,
+				duration: minutes,
+			})
+		);
 		clearState();
 		navigate('/courses');
 	};
@@ -77,17 +88,12 @@ export const CreateCourse = ({
 			/>
 			<div className={styles.row}>
 				<div className={styles.column}>
-					<AddAuthor createNewAuthor={createNewAuthor} />
+					<AddAuthor />
 					<Duration onMinutesChange={setMinutes} minutes={minutes} />
 				</div>
 				<div className={styles.column}>
-					<Authors
-						authorsList={authorsList}
-						addAuthor={addAuthor}
-						selectedAuthors={selectedAuthors}
-					/>
+					<Authors addAuthor={addAuthor} selectedAuthors={selectedAuthors} />
 					<CourseAuthors
-						authorsList={authorsList}
 						selectedAuthors={selectedAuthors}
 						deleteAuthor={deleteAuthor}
 					/>
