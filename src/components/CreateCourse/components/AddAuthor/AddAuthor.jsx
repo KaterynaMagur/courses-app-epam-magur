@@ -3,11 +3,13 @@ import styles from '../../CreateCourse.module.scss';
 import { Input } from '../../../../common/Input/Input';
 import { useState } from 'react';
 
-export const AddAuthor = ({ createNewAuthor }) => {
+export const AddAuthor = () => {
 	const [newAuthorName, setNewAuthorName] = useState('');
 	const handleInputChange = ({ target: { value } }) => {
 		setNewAuthorName(value);
 	};
+
+	const handleAddAuthor = () => {};
 
 	return (
 		<div className={styles.addAuthorDiv}>
@@ -18,7 +20,7 @@ export const AddAuthor = ({ createNewAuthor }) => {
 				placeholderText='Enter Author name'
 			/>
 			<div className={styles.buttonDiv}>
-				<Button onClick={() => createNewAuthor(newAuthorName)} secondary>
+				<Button onClick={handleAddAuthor} secondary>
 					Create author
 				</Button>
 			</div>

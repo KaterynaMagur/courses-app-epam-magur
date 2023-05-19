@@ -9,11 +9,7 @@ import { AddAuthor } from './components/AddAuthor/AddAuthor';
 import { Duration } from './components/Duration/Duration';
 import { useNavigate } from 'react-router-dom';
 
-export const CreateCourse = ({
-	authorsList,
-	createNewAuthor,
-	createNewCourse,
-}) => {
+export const CreateCourse = () => {
 	const [selectedAuthors, setSelectedAuthors] = useState([]);
 	const [minutes, setMinutes] = useState(0);
 	const [title, setTitle] = useState('');
@@ -51,7 +47,7 @@ export const CreateCourse = ({
 		if (!minutes || !title || !description || !selectedAuthors.length) {
 			return alert('Please, fill in all fields');
 		}
-		createNewCourse(title, description, minutes, selectedAuthors);
+		// createNewCourse(title, description, minutes, selectedAuthors);
 		clearState();
 		navigate('/courses');
 	};
@@ -77,17 +73,12 @@ export const CreateCourse = ({
 			/>
 			<div className={styles.row}>
 				<div className={styles.column}>
-					<AddAuthor createNewAuthor={createNewAuthor} />
+					<AddAuthor />
 					<Duration onMinutesChange={setMinutes} minutes={minutes} />
 				</div>
 				<div className={styles.column}>
-					<Authors
-						authorsList={authorsList}
-						addAuthor={addAuthor}
-						selectedAuthors={selectedAuthors}
-					/>
+					<Authors addAuthor={addAuthor} selectedAuthors={selectedAuthors} />
 					<CourseAuthors
-						authorsList={authorsList}
 						selectedAuthors={selectedAuthors}
 						deleteAuthor={deleteAuthor}
 					/>

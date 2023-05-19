@@ -2,8 +2,12 @@ import { Button } from '../../../../common/Button/Button';
 import { useMemo } from 'react';
 import styles from './CourseCard.module.scss';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectAuthors } from '../../../../store';
 
-export const CourseCard = ({ course, authorsList }) => {
+export const CourseCard = ({ course }) => {
+	const authorsList = useSelector(selectAuthors);
+
 	const authors = useMemo(() => {
 		return authorsList
 			.filter((author) => course.authors.includes(author.id))

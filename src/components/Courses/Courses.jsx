@@ -7,27 +7,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectCourses, selectUser } from '../../store';
 import { api } from '../../servisces';
 import { setCourses } from '../../store/courses/actionCreators';
+import { setAuthors } from '../../store/authors/actionCreators';
+import { useNavigate } from 'react-router-dom';
 
-export const Courses = ({ onAddNewCourse, authorsList }) => {
+export const Courses = () => {
 	const [search, setSearch] = useState('');
 	const coursesList = useSelector(selectCourses);
-	const currentUser = useSelector(selectUser);
-
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-		if (currentUser.isAuth) {
-			api.courses.getAllCourses().then((response) => {
-				dispatch(setCourses(response.data.result));
-			});
-		}
-	}, [currentUser, dispatch]);
+	const navigate = useNavigate();
 
 	return (
 		<div className={styles.mainContent}>
 			<div className={styles.controlDiv}>
 				<SearchBar onSearch={setSearch} />
-				<Button primary onClick={onAddNewCourse}>
+				<Button primary onClick={() => navigate('/courses/add')}>
 					Add new course
 				</Button>
 			</div>
@@ -39,11 +31,7 @@ export const Courses = ({ onAddNewCourse, authorsList }) => {
 				)
 
 				.map((course) => (
-					<CourseCard
-						authorsList={authorsList}
-						course={course}
-						key={course.id}
-					/>
+					<CourseCard course={course} key={course.id} />
 				))}
 		</div>
 	);
