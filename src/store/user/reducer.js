@@ -1,5 +1,4 @@
-import { createReducer } from '@reduxjs/toolkit/src';
-import { LOG_OUT_USER, SET_USER } from './actionTypes';
+import { createReducer } from '@reduxjs/toolkit';
 import { setUser, logUserOut } from './actionCreators';
 
 const initialState = {

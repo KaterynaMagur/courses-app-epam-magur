@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const user = {
-	login: (email, password) => axios.post('/login'),
+	login: (email, password) => axios.post('/login', { email, password }),
 	register: (user) => axios.post('/register', user),
 };
 const courses = {

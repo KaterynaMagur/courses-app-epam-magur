@@ -5,9 +5,9 @@ import { Courses } from './components/Courses/Courses';
 import { CreateCourse } from './components/CreateCourse/CreateCourse';
 import { DefaultPage } from './components/DefaultPage/DefaultPage';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { mockedAuthorsList, mockedCoursesList } from './constants';
+import { mockedAuthorsList } from './constants';
 
 import { getCurrentDate } from './helpers/dateGeneratop';
 
@@ -16,6 +16,8 @@ import { Registration } from './components/Registration/Registration';
 import { Login } from './components/Login/Login';
 import { CourseInfo } from './components/CourseInfo/CourseInfo';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setUser } from './store/user/actionCreators';
 
 axios.defaults.baseURL = 'http://localhost:4000';
 axios.interceptors.request.use((config) => {
@@ -27,8 +29,15 @@ axios.interceptors.request.use((config) => {
 
 const App = () => {
 	const [authorsList, setAuthors] = useState(mockedAuthorsList);
-	const [coursesList, setCourses] = useState(mockedCoursesList);
 	const [isNewCourseOpen, setNewCourseOpen] = useState(false);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		const user = localStorage.getItem('userData');
+		if (user) {
+			dispatch(setUser(JSON.parse(user)));
+		}
+	}, [dispatch]);
 
 	const createNewAuthor = (name) => {
 		const author = {
@@ -49,7 +58,7 @@ const App = () => {
 			authors: authors,
 		};
 
-		setCourses([...coursesList, course]);
+		// setCourses([...coursesList, course]);
 		setNewCourseOpen(false);
 	};
 
@@ -63,7 +72,6 @@ const App = () => {
 						<Courses
 							onAddNewCourse={() => setNewCourseOpen(true)}
 							authorsList={authorsList}
-							coursesList={coursesList}
 						/>
 					}
 				></Route>
