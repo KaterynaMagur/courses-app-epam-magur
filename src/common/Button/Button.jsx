@@ -4,6 +4,7 @@ export const Button = ({
 	primary,
 	secondary,
 	small,
+	disabled,
 	onClick,
 	children,
 	type,
@@ -19,7 +20,12 @@ export const Button = ({
 		combined.push(styles.small);
 	}
 	return (
-		<button className={combined.join(' ')} onClick={onClick} type={type}>
+		<button
+			disabled={disabled}
+			className={combined.join(' ')}
+			onClick={onClick}
+			type={type}
+		>
 			{children}
 		</button>
 	);

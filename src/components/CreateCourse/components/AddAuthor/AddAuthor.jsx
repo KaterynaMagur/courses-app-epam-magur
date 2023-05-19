@@ -2,14 +2,32 @@ import { Button } from '../../../../common/Button/Button';
 import styles from '../../CreateCourse.module.scss';
 import { Input } from '../../../../common/Input/Input';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { api } from '../../../../servisces';
+import { addAuthor } from '../../../../store/authors/actionCreators';
 
 export const AddAuthor = () => {
 	const [newAuthorName, setNewAuthorName] = useState('');
+	const [loading, setLoading] = useState(false);
+	const dispatch = useDispatch();
 	const handleInputChange = ({ target: { value } }) => {
 		setNewAuthorName(value);
 	};
 
-	const handleAddAuthor = () => {};
+	const handleAddAuthor = () => {
+		setLoading(true);
+		api.authors
+			.addAuthor(newAuthorName)
+			.then((response) => {
+				dispatch(addAuthor(response.data.result));
+			})
+			.catch((err) => {
+				alert(err.response.data.message);
+			})
+			.finally(() => {
+				setLoading(false);
+			});
+	};
 
 	return (
 		<div className={styles.addAuthorDiv}>
@@ -20,7 +38,11 @@ export const AddAuthor = () => {
 				placeholderText='Enter Author name'
 			/>
 			<div className={styles.buttonDiv}>
-				<Button onClick={handleAddAuthor} secondary>
+				<Button
+					disabled={loading || !newAuthorName}
+					onClick={handleAddAuthor}
+					secondary
+				>
 					Create author
 				</Button>
 			</div>

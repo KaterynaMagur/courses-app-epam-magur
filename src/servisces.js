@@ -12,7 +12,7 @@ const courses = {
 };
 const authors = {
 	getAllAuthors: () => axios.get('/authors/all'),
-	addAuthor: (author) => axios.post('/authors/add'),
+	addAuthor: (name) => axios.post('/authors/add', { name }),
 };
 
 export const api = {
