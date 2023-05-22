@@ -5,7 +5,7 @@ import { SearchBar } from './components/SearchBar/SearchBar';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCourses, selectUser } from '../../store';
-import { api } from '../../servisces';
+import { api } from '../../services';
 import { setCourses } from '../../store/courses/actionCreators';
 import { setAuthors } from '../../store/authors/actionCreators';
 import { useNavigate } from 'react-router-dom';

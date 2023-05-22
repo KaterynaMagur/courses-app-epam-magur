@@ -3,7 +3,7 @@ import styles from '../../CreateCourse.module.scss';
 import { Input } from '../../../../common/Input/Input';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { api } from '../../../../servisces';
+import { api } from '../../../../services';
 import {
 	addAuthor,
 	setAuthors,

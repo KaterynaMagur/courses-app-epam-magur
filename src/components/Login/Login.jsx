@@ -4,7 +4,7 @@ import styles from './Login.module.scss';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { api } from '../../servisces';
+import { api } from '../../services';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../store/user/actionCreators';
 

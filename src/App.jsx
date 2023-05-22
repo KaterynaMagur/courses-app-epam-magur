@@ -14,7 +14,7 @@ import { CourseInfo } from './components/CourseInfo/CourseInfo';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from './store/user/actionCreators';
-import { api } from './servisces';
+import { api } from './services';
 import { setCourses } from './store/courses/actionCreators';
 import { setAuthors } from './store/authors/actionCreators';
 import { selectUser } from './store';
