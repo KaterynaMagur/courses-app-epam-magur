@@ -2,12 +2,9 @@ import { CourseCard } from './components/CourseCard/CourseCard';
 import { Button } from '../../common/Button/Button';
 import styles from './Courses.module.scss';
 import { SearchBar } from './components/SearchBar/SearchBar';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectCourses, selectUser } from '../../store';
-import { api } from '../../servisces';
-import { setCourses } from '../../store/courses/actionCreators';
-import { setAuthors } from '../../store/authors/actionCreators';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectCourses } from '../../store';
 import { useNavigate } from 'react-router-dom';
 
 export const Courses = () => {

@@ -1,7 +1,7 @@
 import { Input } from '../../common/Input/Input';
 import { Button } from '../../common/Button/Button';
 import { TextArea } from '../../common/Textarea/TextArea';
-import styles from './CreateCourse.module.scss';
+import styles from './CourseForm.module.scss';
 import { useCallback, useEffect, useState } from 'react';
 import { Authors } from './components/Authors/Authors';
 import { CourseAuthors } from './components/CourseAuthors/CourseAuthors';
@@ -13,7 +13,7 @@ import { addNewCourse } from '../../store/courses/actionCreators';
 import { useDispatch } from 'react-redux';
 import { getCurrentDate } from '../../helpers/dateGeneratop';
 
-export const CreateCourse = () => {
+export const CourseForm = () => {
 	const [selectedAuthors, setSelectedAuthors] = useState([]);
 	const [minutes, setMinutes] = useState(0);
 	const [title, setTitle] = useState('');

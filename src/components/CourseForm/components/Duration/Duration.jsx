@@ -1,4 +1,4 @@
-import styles from '../../CreateCourse.module.scss';
+import styles from '../../CourseForm.module.scss';
 
 import { Input } from '../../../../common/Input/Input';
 

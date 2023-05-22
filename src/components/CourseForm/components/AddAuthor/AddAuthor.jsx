@@ -1,5 +1,5 @@
 import { Button } from '../../../../common/Button/Button';
-import styles from '../../CreateCourse.module.scss';
+import styles from '../../CourseForm.module.scss';
 import { Input } from '../../../../common/Input/Input';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';

@@ -1,8 +1,6 @@
-import { v4 as uuidv4 } from 'uuid';
-
 import { Header } from './components/Header/Header';
 import { Courses } from './components/Courses/Courses';
-import { CreateCourse } from './components/CreateCourse/CreateCourse';
+import { CourseForm } from './components/CourseForm/CourseForm';
 import { DefaultPage } from './components/DefaultPage/DefaultPage';
 
 import { useEffect } from 'react';
@@ -18,6 +16,7 @@ import { api } from './servisces';
 import { setCourses } from './store/courses/actionCreators';
 import { setAuthors } from './store/authors/actionCreators';
 import { selectUser } from './store';
+import { PrivateRoute } from './components/PrivateRouter/PrivateRouter';
 
 axios.defaults.baseURL = 'http://localhost:4000';
 axios.interceptors.request.use((config) => {
@@ -54,7 +53,14 @@ const App = () => {
 			<Header />
 			<Routes>
 				<Route path='/courses' element={<Courses />}></Route>
-				<Route path='/courses/add' element={<CreateCourse />}></Route>
+				<Route
+					path='/courses/add'
+					element={
+						<PrivateRoute>
+							<CourseForm />
+						</PrivateRoute>
+					}
+				></Route>
 				<Route path='/registration' element={<Registration />}></Route>
 				<Route path='/login' element={<Login />}></Route>
 				<Route path='/courses/:courseId' element={<CourseInfo />}></Route>

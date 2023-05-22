@@ -6,6 +6,7 @@ const initialState = {
 	name: '',
 	email: '',
 	token: '',
+	role: 'admin',
 };
 
 export const userReducer = createReducer(initialState, (builder) => {
