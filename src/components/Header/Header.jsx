@@ -6,6 +6,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { logUserOut } from '../../store/user/actionCreators';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../store';
+import { logoutUser } from '../../store/user/thunk';
+import { useEffect } from 'react';
 
 export const Header = () => {
 	const navigate = useNavigate();
@@ -14,10 +16,14 @@ export const Header = () => {
 
 	const user = useSelector(selectUser);
 
+	useEffect(() => {
+		if (!user.isAuth) {
+			navigate('/login');
+		}
+	}, [user, navigate]);
+
 	const logout = () => {
-		localStorage.clear();
-		dispatch(logUserOut());
-		navigate('/login');
+		dispatch(logoutUser());
 	};
 
 	const showLogout =

@@ -1,5 +1,5 @@
 import { api } from '../../servisces';
-import { setUser } from './actionCreators';
+import { logUserOut, setUser } from './actionCreators';
 
 export const loginUser = (email, password) => async (dispatch) => {
 	try {
@@ -15,5 +15,14 @@ export const loginUser = (email, password) => async (dispatch) => {
 	} catch (err) {
 		const errors = err?.response?.data?.errors?.join(', ');
 		alert(errors || 'Something went wrong');
+	}
+};
+
+export const logoutUser = () => async (dispatch) => {
+	try {
+		await api.user.logout();
+	} finally {
+		localStorage.clear();
+		dispatch(logUserOut());
 	}
 };

@@ -3,6 +3,7 @@ import axios from 'axios';
 const user = {
 	login: (email, password) => axios.post('/login', { email, password }),
 	register: (user) => axios.post('/register', user),
+	logout: () => axios.delete('/logout'),
 };
 const courses = {
 	getAllCourses: () => axios.get('/courses/all'),
