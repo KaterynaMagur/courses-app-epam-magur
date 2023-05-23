@@ -3,12 +3,15 @@ import { userReducer } from './user/reducer';
 import { authorsReducer } from './authors/reducer';
 import { coursesReducer } from './courses/reducer';
 
+import thunk from 'redux-thunk';
+
 export const store = configureStore({
 	reducer: {
 		user: userReducer,
 		courses: coursesReducer,
 		authors: authorsReducer,
 	},
+	middleware: [thunk],
 });
 
 export const selectCourses = (state) => state.courses;
