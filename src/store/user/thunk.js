@@ -4,12 +4,11 @@ import { logUserOut, setUser } from './actionCreators';
 export const loginUser = (email, password) => async (dispatch) => {
 	try {
 		const res = await api.user.login(email, password);
-		localStorage.setItem('token', JSON.stringify(res.data.result));
+		localStorage.setItem('token', res.data.result);
 		const userData = {
 			...res.data.user,
 			token: res.data.result,
 		};
-		localStorage.setItem('userData', JSON.stringify(userData));
 
 		dispatch(setUser(userData));
 	} catch (err) {
@@ -25,4 +24,15 @@ export const logoutUser = () => async (dispatch) => {
 		localStorage.clear();
 		dispatch(logUserOut());
 	}
+};
+
+export const loadUser = () => async (dispatch) => {
+	try {
+		const res = await api.user.me();
+		const userData = {
+			...res.data.result,
+			token: localStorage.getItem('token') || '',
+		};
+		dispatch(setUser(userData));
+	} catch (e) {}
 };

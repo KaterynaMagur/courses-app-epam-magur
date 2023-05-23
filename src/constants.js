@@ -52,3 +52,5 @@ export const mockedAuthorsList = [
 		name: 'Valentina Larina',
 	},
 ];
+
+export const ADMIN = 'admin';

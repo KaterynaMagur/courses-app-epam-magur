@@ -17,6 +17,7 @@ import { setCourses } from './store/courses/actionCreators';
 import { setAuthors } from './store/authors/actionCreators';
 import { selectUser } from './store';
 import { PrivateRoute } from './components/PrivateRouter/PrivateRouter';
+import { loadUser } from './store/user/thunk';
 
 axios.defaults.baseURL = 'http://localhost:4000';
 axios.interceptors.request.use((config) => {
@@ -31,11 +32,11 @@ const App = () => {
 	const currentUser = useSelector(selectUser);
 
 	useEffect(() => {
-		const user = localStorage.getItem('userData');
-		if (user) {
-			dispatch(setUser(JSON.parse(user)));
+		const token = localStorage.getItem('token');
+		if (!currentUser.isAuth && token) {
+			dispatch(loadUser());
 		}
-	}, [dispatch]);
+	}, [currentUser, dispatch]);
 
 	useEffect(() => {
 		if (currentUser.isAuth) {

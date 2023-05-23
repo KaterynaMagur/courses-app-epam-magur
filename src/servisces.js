@@ -4,6 +4,7 @@ const user = {
 	login: (email, password) => axios.post('/login', { email, password }),
 	register: (user) => axios.post('/register', user),
 	logout: () => axios.delete('/logout'),
+	me: () => axios.get('/users/me'),
 };
 const courses = {
 	getAllCourses: () => axios.get('/courses/all'),
