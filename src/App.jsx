@@ -11,7 +11,6 @@ import { Login } from './components/Login/Login';
 import { CourseInfo } from './components/CourseInfo/CourseInfo';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUser } from './store/user/actionCreators';
 import { api } from './servisces';
 import { setCourses } from './store/courses/actionCreators';
 import { setAuthors } from './store/authors/actionCreators';
@@ -61,6 +60,10 @@ const App = () => {
 							<CourseForm />
 						</PrivateRoute>
 					}
+				></Route>
+				<Route
+					path='/courses/update/:courseId'
+					element={<CourseForm />}
 				></Route>
 				<Route path='/registration' element={<Registration />}></Route>
 				<Route path='/login' element={<Login />}></Route>

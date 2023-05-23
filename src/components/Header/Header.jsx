@@ -3,11 +3,9 @@ import { Logo } from './components/Logo/Logo';
 
 import styles from './Header.module.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { logUserOut } from '../../store/user/actionCreators';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../store';
 import { logoutUser } from '../../store/user/thunk';
-import { useEffect } from 'react';
 
 export const Header = () => {
 	const navigate = useNavigate();
@@ -16,14 +14,14 @@ export const Header = () => {
 
 	const user = useSelector(selectUser);
 
-	useEffect(() => {
-		if (!user.isAuth) {
+	const logout = () => {
+		if (user.isAuth) {
+			dispatch(logoutUser()).then(() => {
+				navigate('/login');
+			});
+		} else {
 			navigate('/login');
 		}
-	}, [user, navigate]);
-
-	const logout = () => {
-		dispatch(logoutUser());
 	};
 
 	const showLogout =

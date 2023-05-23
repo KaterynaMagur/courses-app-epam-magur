@@ -5,12 +5,7 @@ export const loginUser = (email, password) => async (dispatch) => {
 	try {
 		const res = await api.user.login(email, password);
 		localStorage.setItem('token', res.data.result);
-		const userData = {
-			...res.data.user,
-			token: res.data.result,
-		};
-
-		dispatch(setUser(userData));
+		dispatch(loadUser());
 	} catch (err) {
 		const errors = err?.response?.data?.errors?.join(', ');
 		alert(errors || 'Something went wrong');
@@ -20,9 +15,11 @@ export const loginUser = (email, password) => async (dispatch) => {
 export const logoutUser = () => async (dispatch) => {
 	try {
 		await api.user.logout();
-	} finally {
 		localStorage.clear();
 		dispatch(logUserOut());
+		return Promise.resolve();
+	} catch (e) {
+		return Promise.reject();
 	}
 };
 
@@ -34,5 +31,8 @@ export const loadUser = () => async (dispatch) => {
 			token: localStorage.getItem('token') || '',
 		};
 		dispatch(setUser(userData));
-	} catch (e) {}
+	} catch (e) {
+		localStorage.clear();
+		dispatch(logUserOut());
+	}
 };

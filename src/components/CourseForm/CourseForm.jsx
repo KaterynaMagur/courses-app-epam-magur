@@ -8,10 +8,9 @@ import { CourseAuthors } from './components/CourseAuthors/CourseAuthors';
 import { AddAuthor } from './components/AddAuthor/AddAuthor';
 import { Duration } from './components/Duration/Duration';
 import { useNavigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
-import { addNewCourse } from '../../store/courses/actionCreators';
 import { useDispatch } from 'react-redux';
 import { getCurrentDate } from '../../helpers/dateGeneratop';
+import { createCourse } from '../../store/courses/thunk';
 
 export const CourseForm = () => {
 	const [selectedAuthors, setSelectedAuthors] = useState([]);
@@ -52,10 +51,8 @@ export const CourseForm = () => {
 		if (!minutes || !title || !description || !selectedAuthors.length) {
 			return alert('Please, fill in all fields');
 		}
-		// createNewCourse(title, description, minutes, selectedAuthors);
 		dispatch(
-			addNewCourse({
-				id: uuidv4(),
+			createCourse({
 				title,
 				description,
 				creationDate: getCurrentDate(),
