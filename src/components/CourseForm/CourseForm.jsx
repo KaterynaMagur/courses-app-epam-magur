@@ -7,10 +7,11 @@ import { Authors } from './components/Authors/Authors';
 import { CourseAuthors } from './components/CourseAuthors/CourseAuthors';
 import { AddAuthor } from './components/AddAuthor/AddAuthor';
 import { Duration } from './components/Duration/Duration';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentDate } from '../../helpers/dateGeneratop';
-import { createCourse } from '../../store/courses/thunk';
+import { createCourse, updateCourseThunk } from '../../store/courses/thunk';
+import { selectCourses } from '../../store';
 
 export const CourseForm = () => {
 	const [selectedAuthors, setSelectedAuthors] = useState([]);
@@ -21,6 +22,10 @@ export const CourseForm = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
+	const { courseId } = useParams();
+
+	const courses = useSelector(selectCourses);
+
 	const clearState = useCallback(() => {
 		setTitle('');
 		setDescription('');
@@ -29,8 +34,19 @@ export const CourseForm = () => {
 	}, []);
 
 	useEffect(() => {
-		clearState();
-	}, [clearState]);
+		if (courseId) {
+			// Update course
+			const course = courses.find((course) => course.id === courseId);
+			if (course) {
+				setTitle(course.title);
+				setDescription(course.description);
+				setMinutes(course.duration);
+				setSelectedAuthors(course.authors);
+			}
+		} else {
+			clearState();
+		}
+	}, [courses, courseId, clearState]);
 	const addAuthor = (id) => {
 		setSelectedAuthors([...selectedAuthors, id]);
 	};
@@ -47,19 +63,23 @@ export const CourseForm = () => {
 		setDescription(value);
 	};
 
-	const handleCreateCourse = () => {
+	const handleSaveCourse = () => {
 		if (!minutes || !title || !description || !selectedAuthors.length) {
 			return alert('Please, fill in all fields');
 		}
-		dispatch(
-			createCourse({
-				title,
-				description,
-				creationDate: getCurrentDate(),
-				authors: selectedAuthors,
-				duration: minutes,
-			})
-		);
+		const courseData = {
+			title,
+			description,
+			creationDate: getCurrentDate(),
+			authors: selectedAuthors,
+			duration: minutes,
+		};
+		let action = createCourse;
+		if (courseId) {
+			action = updateCourseThunk;
+			courseData.id = courseId;
+		}
+		dispatch(action(courseData));
 		clearState();
 		navigate('/courses');
 	};
@@ -73,8 +93,8 @@ export const CourseForm = () => {
 					value={title}
 					onChange={handleInputTitleChange}
 				/>
-				<Button primary onClick={handleCreateCourse}>
-					Create course
+				<Button primary onClick={handleSaveCourse}>
+					{courseId ? 'Update course' : 'Create course'}
 				</Button>
 			</div>
 			<TextArea

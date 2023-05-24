@@ -5,10 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAuthors, selectUser } from '../../../../store';
 import { ADMIN } from '../../../../constants';
-import {
-	deleteCourseThunk,
-	updateCourseThunk,
-} from '../../../../store/courses/thunk';
+import { deleteCourseThunk } from '../../../../store/courses/thunk';
 
 const AdminButtons = ({ course }) => {
 	const dispatch = useDispatch();
@@ -18,7 +15,7 @@ const AdminButtons = ({ course }) => {
 	};
 
 	const handleUpdateCourse = () => {
-		navigate('/courses/update/:courseId');
+		navigate(`/courses/update/${course.id}`);
 	};
 
 	return (

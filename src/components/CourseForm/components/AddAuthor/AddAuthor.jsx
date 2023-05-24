@@ -4,10 +4,7 @@ import { Input } from '../../../../common/Input/Input';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { api } from '../../../../servisces';
-import {
-	addAuthor,
-	setAuthors,
-} from '../../../../store/authors/actionCreators';
+import { addAuthor } from '../../../../store/authors/actionCreators';
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -19,20 +16,20 @@ export const AddAuthor = () => {
 		setNewAuthorName(value);
 	};
 
-	const handleAddAuthor = () => {
-		setLoading(true);
-		api.authors
-			.addAuthor(newAuthorName)
-			.then((response) => {
-				dispatch(addAuthor(response.data.result));
-			})
-			.catch((err) => {
-				alert(err.response.data.message);
-			})
-			.finally(() => {
-				setLoading(false);
-			});
-	};
+	// const handleAddAuthor = () => {
+	// 	setLoading(true);
+	// 	api.authors
+	// 		.addAuthor(newAuthorName)
+	// 		.then((response) => {
+	// 			dispatch(addAuthor(response.data.result));
+	// 		})
+	// 		.catch((err) => {
+	// 			alert(err.response.data.message);
+	// 		})
+	// 		.finally(() => {
+	// 			setLoading(false);
+	// 		});
+	// };
 
 	const mockHandleAddUser = () => {
 		dispatch(addAuthor({ id: uuidv4(), name: newAuthorName }));
