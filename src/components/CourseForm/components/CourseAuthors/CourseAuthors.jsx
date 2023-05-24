@@ -1,4 +1,4 @@
-import styles from '../../CreateCourse.module.scss';
+import styles from '../../CourseForm.module.scss';
 import { Button } from '../../../../common/Button/Button';
 import { useSelector } from 'react-redux';
 import { selectAuthors } from '../../../../store';

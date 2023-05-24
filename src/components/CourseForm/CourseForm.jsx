@@ -1,19 +1,19 @@
 import { Input } from '../../common/Input/Input';
 import { Button } from '../../common/Button/Button';
 import { TextArea } from '../../common/Textarea/TextArea';
-import styles from './CreateCourse.module.scss';
+import styles from './CourseForm.module.scss';
 import { useCallback, useEffect, useState } from 'react';
 import { Authors } from './components/Authors/Authors';
 import { CourseAuthors } from './components/CourseAuthors/CourseAuthors';
 import { AddAuthor } from './components/AddAuthor/AddAuthor';
 import { Duration } from './components/Duration/Duration';
-import { useNavigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
-import { addNewCourse } from '../../store/courses/actionCreators';
-import { useDispatch } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentDate } from '../../helpers/dateGeneratop';
+import { createCourse, updateCourseThunk } from '../../store/courses/thunk';
+import { selectCourses } from '../../store';
 
-export const CreateCourse = () => {
+export const CourseForm = () => {
 	const [selectedAuthors, setSelectedAuthors] = useState([]);
 	const [minutes, setMinutes] = useState(0);
 	const [title, setTitle] = useState('');
@@ -21,6 +21,10 @@ export const CreateCourse = () => {
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+
+	const { courseId } = useParams();
+
+	const courses = useSelector(selectCourses);
 
 	const clearState = useCallback(() => {
 		setTitle('');
@@ -30,8 +34,19 @@ export const CreateCourse = () => {
 	}, []);
 
 	useEffect(() => {
-		clearState();
-	}, [clearState]);
+		if (courseId) {
+			// Update course
+			const course = courses.find((course) => course.id === courseId);
+			if (course) {
+				setTitle(course.title);
+				setDescription(course.description);
+				setMinutes(course.duration);
+				setSelectedAuthors(course.authors);
+			}
+		} else {
+			clearState();
+		}
+	}, [courses, courseId, clearState]);
 	const addAuthor = (id) => {
 		setSelectedAuthors([...selectedAuthors, id]);
 	};
@@ -48,21 +63,23 @@ export const CreateCourse = () => {
 		setDescription(value);
 	};
 
-	const handleCreateCourse = () => {
+	const handleSaveCourse = () => {
 		if (!minutes || !title || !description || !selectedAuthors.length) {
 			return alert('Please, fill in all fields');
 		}
-		// createNewCourse(title, description, minutes, selectedAuthors);
-		dispatch(
-			addNewCourse({
-				id: uuidv4(),
-				title,
-				description,
-				creationDate: getCurrentDate(),
-				authors: selectedAuthors,
-				duration: minutes,
-			})
-		);
+		const courseData = {
+			title,
+			description,
+			creationDate: getCurrentDate(),
+			authors: selectedAuthors,
+			duration: minutes,
+		};
+		let action = createCourse;
+		if (courseId) {
+			action = updateCourseThunk;
+			courseData.id = courseId;
+		}
+		dispatch(action(courseData));
 		clearState();
 		navigate('/courses');
 	};
@@ -76,8 +93,8 @@ export const CreateCourse = () => {
 					value={title}
 					onChange={handleInputTitleChange}
 				/>
-				<Button primary onClick={handleCreateCourse}>
-					Create course
+				<Button primary onClick={handleSaveCourse}>
+					{courseId ? 'Update course' : 'Create course'}
 				</Button>
 			</div>
 			<TextArea

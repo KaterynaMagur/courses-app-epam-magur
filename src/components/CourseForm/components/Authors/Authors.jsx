@@ -1,5 +1,5 @@
 import { Button } from '../../../../common/Button/Button';
-import styles from '../../CreateCourse.module.scss';
+import styles from '../../CourseForm.module.scss';
 import { useSelector } from 'react-redux';
 import { selectAuthors } from '../../../../store';
 

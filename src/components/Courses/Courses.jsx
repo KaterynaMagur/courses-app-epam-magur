@@ -2,26 +2,27 @@ import { CourseCard } from './components/CourseCard/CourseCard';
 import { Button } from '../../common/Button/Button';
 import styles from './Courses.module.scss';
 import { SearchBar } from './components/SearchBar/SearchBar';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { selectCourses, selectUser } from '../../store';
-import { api } from '../../servisces';
-import { setCourses } from '../../store/courses/actionCreators';
-import { setAuthors } from '../../store/authors/actionCreators';
 import { useNavigate } from 'react-router-dom';
+import { ADMIN } from '../../constants';
 
 export const Courses = () => {
 	const [search, setSearch] = useState('');
 	const coursesList = useSelector(selectCourses);
 	const navigate = useNavigate();
+	const user = useSelector(selectUser);
 
 	return (
 		<div className={styles.mainContent}>
 			<div className={styles.controlDiv}>
 				<SearchBar onSearch={setSearch} />
-				<Button primary onClick={() => navigate('/courses/add')}>
-					Add new course
-				</Button>
+				{user.role === ADMIN ? (
+					<Button primary onClick={() => navigate('/courses/add')}>
+						Add new course
+					</Button>
+				) : null}
 			</div>
 			{coursesList
 				.filter(
