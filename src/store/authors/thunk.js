@@ -1,10 +1,10 @@
 import { addAuthor, setAuthors } from './actionCreators';
 import { api } from '../../servisces';
 
-export const getAuthorThunk = () => async (dispatch) => {
+export const getAuthorsThunk = () => async (dispatch) => {
 	try {
-		await api.authors.getAllAuthors();
-		dispatch(setAuthors());
+		const res = await api.authors.getAllAuthors();
+		dispatch(setAuthors(res.data.result));
 	} catch (e) {}
 };
 

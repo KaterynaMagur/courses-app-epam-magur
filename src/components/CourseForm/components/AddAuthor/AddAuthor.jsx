@@ -7,32 +7,17 @@ import { api } from '../../../../servisces';
 import { addAuthor } from '../../../../store/authors/actionCreators';
 
 import { v4 as uuidv4 } from 'uuid';
+import { addAuthorThunk } from '../../../../store/authors/thunk';
 
 export const AddAuthor = () => {
 	const [newAuthorName, setNewAuthorName] = useState('');
-	const [loading, setLoading] = useState(false);
 	const dispatch = useDispatch();
 	const handleInputChange = ({ target: { value } }) => {
 		setNewAuthorName(value);
 	};
 
-	// const handleAddAuthor = () => {
-	// 	setLoading(true);
-	// 	api.authors
-	// 		.addAuthor(newAuthorName)
-	// 		.then((response) => {
-	// 			dispatch(addAuthor(response.data.result));
-	// 		})
-	// 		.catch((err) => {
-	// 			alert(err.response.data.message);
-	// 		})
-	// 		.finally(() => {
-	// 			setLoading(false);
-	// 		});
-	// };
-
-	const mockHandleAddUser = () => {
-		dispatch(addAuthor({ id: uuidv4(), name: newAuthorName }));
+	const handleAddAuthor = () => {
+		dispatch(addAuthorThunk(newAuthorName));
 	};
 
 	return (
@@ -44,11 +29,7 @@ export const AddAuthor = () => {
 				placeholderText='Enter Author name'
 			/>
 			<div className={styles.buttonDiv}>
-				<Button
-					disabled={loading || !newAuthorName}
-					onClick={mockHandleAddUser}
-					secondary
-				>
+				<Button disabled={!newAuthorName} onClick={handleAddAuthor} secondary>
 					Create author
 				</Button>
 			</div>

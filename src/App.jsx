@@ -11,12 +11,11 @@ import { Login } from './components/Login/Login';
 import { CourseInfo } from './components/CourseInfo/CourseInfo';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { api } from './servisces';
-import { setCourses } from './store/courses/actionCreators';
-import { setAuthors } from './store/authors/actionCreators';
 import { selectUser } from './store';
 import { PrivateRoute } from './components/PrivateRouter/PrivateRouter';
 import { loadUser } from './store/user/thunk';
+import { getAuthorsThunk } from './store/authors/thunk';
+import { loadCoursesThunk } from './store/courses/thunk';
 
 axios.defaults.baseURL = 'http://localhost:4000';
 axios.interceptors.request.use((config) => {
@@ -39,12 +38,8 @@ const App = () => {
 
 	useEffect(() => {
 		if (currentUser.isAuth) {
-			api.courses.getAllCourses().then((response) => {
-				dispatch(setCourses(response.data.result));
-			});
-			api.authors.getAllAuthors().then((response) => {
-				dispatch(setAuthors(response.data.result));
-			});
+			dispatch(loadCoursesThunk());
+			dispatch(getAuthorsThunk());
 		}
 	}, [currentUser, dispatch]);
 

@@ -1,5 +1,17 @@
 import { api } from '../../servisces';
-import { addNewCourse, deleteCourse, updateCourse } from './actionCreators';
+import {
+	addNewCourse,
+	deleteCourse,
+	setCourses,
+	updateCourse,
+} from './actionCreators';
+
+export const loadCoursesThunk = () => async (dispatch) => {
+	try {
+		const res = await api.courses.getAllCourses();
+		dispatch(setCourses(res.data.result));
+	} catch (e) {}
+};
 
 export const deleteCourseThunk = (id) => async (dispatch) => {
 	try {
