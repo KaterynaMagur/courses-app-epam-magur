@@ -63,7 +63,11 @@ const App = () => {
 				></Route>
 				<Route
 					path='/courses/update/:courseId'
-					element={<CourseForm />}
+					element={
+						<PrivateRoute>
+							<CourseForm />
+						</PrivateRoute>
+					}
 				></Route>
 				<Route path='/registration' element={<Registration />}></Route>
 				<Route path='/login' element={<Login />}></Route>
