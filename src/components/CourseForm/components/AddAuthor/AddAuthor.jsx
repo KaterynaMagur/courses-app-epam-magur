@@ -3,10 +3,6 @@ import styles from '../../CourseForm.module.scss';
 import { Input } from '../../../../common/Input/Input';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { api } from '../../../../servisces';
-import { addAuthor } from '../../../../store/authors/actionCreators';
-
-import { v4 as uuidv4 } from 'uuid';
 import { addAuthorThunk } from '../../../../store/authors/thunk';
 
 export const AddAuthor = () => {

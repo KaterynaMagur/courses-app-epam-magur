@@ -1,3 +1,9 @@
+import { render } from '@testing-library/react';
+
+import { Provider } from 'react-redux';
+
+import { MemoryRouter } from 'react-router-dom';
+
 export const mockedCoursesList = [
 	{
 		id: 'de5aaa59-90f5-4dbc-b8a9-aaf205c551ba',
@@ -54,3 +60,40 @@ export const mockedAuthorsList = [
 ];
 
 export const ADMIN = 'admin';
+
+export const mockedState = {
+	user: {
+		isAuth: true,
+		name: 'Test Name',
+		role: 'admin',
+	},
+	courses: {
+		items: mockedCoursesList,
+	},
+	authors: {
+		items: mockedAuthorsList,
+	},
+};
+
+export const mockedStore = {
+	getState: () => mockedState,
+	subscribe: jest.fn(),
+	dispatch: jest.fn(),
+};
+
+export const renderTestHelper = (
+	component,
+	state = mockedState,
+	initialPath = ''
+) => {
+	mockedStore.getState = () => ({
+		...mockedState,
+		...state,
+	});
+
+	return render(
+		<Provider store={mockedStore}>
+			<MemoryRouter initialEntries={[initialPath]}>{component}</MemoryRouter>
+		</Provider>
+	);
+};

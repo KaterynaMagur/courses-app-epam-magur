@@ -3,9 +3,7 @@ import { Button } from '../../common/Button/Button';
 import styles from './Login.module.scss';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { api } from '../../servisces';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUser } from '../../store/user/actionCreators';
 import { loginUser } from '../../store/user/thunk';
 import { selectUser } from '../../store';
 
