@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectCourses, selectUser } from '../../store';
 import { useNavigate } from 'react-router-dom';
-import { ADMIN } from '../../constants';
+import { ADD_NEW_COURSE_BUTTON, ADMIN } from '../../constants';
 
 export const Courses = () => {
 	const [search, setSearch] = useState('');
@@ -20,11 +20,11 @@ export const Courses = () => {
 				<SearchBar onSearch={setSearch} />
 				{user.role === ADMIN ? (
 					<Button primary onClick={() => navigate('/courses/add')}>
-						Add new course
+						{ADD_NEW_COURSE_BUTTON}
 					</Button>
 				) : null}
 			</div>
-			<div>
+			<div data-testid='course-container'>
 				{coursesList
 					.filter(
 						(course) =>

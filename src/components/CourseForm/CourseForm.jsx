@@ -85,7 +85,7 @@ export const CourseForm = () => {
 	};
 
 	return (
-		<div className={styles.main}>
+		<div data-testid='course-form-container' className={styles.main}>
 			<div className={styles.inputLine}>
 				<Input
 					labelText='Title'

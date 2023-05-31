@@ -1,13 +1,13 @@
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
-import { mockedAuthorsList, mockedCoursesList } from '../constants';
+import { ADMIN, mockedAuthorsList, mockedCoursesList } from '../constants';
 
 export const mockedState = {
 	user: {
 		isAuth: true,
 		name: 'Test Name',
-		role: 'admin',
+		role: ADMIN,
 	},
 	courses: mockedCoursesList,
 	authors: mockedAuthorsList,
