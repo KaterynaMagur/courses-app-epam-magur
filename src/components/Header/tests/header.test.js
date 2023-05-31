@@ -2,7 +2,7 @@ import axios from 'axios';
 import { screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Header } from '../Header';
-import { renderTestHelper } from '../../../constants';
+import { renderTestHelper } from '../../../tests/renderTestHelper';
 
 jest.mock('axios');
 
@@ -16,7 +16,7 @@ describe('check render header', () => {
 		expect(screen.getByAltText('logo')).toBeInTheDocument();
 	});
 
-	test('check username', () => {
+	it('check username', () => {
 		renderTestHelper(<Header />);
 		expect(screen.getByText('Test Name')).toBeInTheDocument();
 	});

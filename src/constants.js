@@ -1,9 +1,3 @@
-import { render } from '@testing-library/react';
-
-import { Provider } from 'react-redux';
-
-import { MemoryRouter } from 'react-router-dom';
-
 export const mockedCoursesList = [
 	{
 		id: 'de5aaa59-90f5-4dbc-b8a9-aaf205c551ba',
@@ -26,12 +20,11 @@ typesetting, remaining essentially unchanged.`,
 	{
 		id: 'b5630fdd-7bf7-4d39-b75a-2b5906fd0916',
 		title: 'Angular',
-		description: `Lorem Ipsum is simply dummy text of the printing and
-typesetting industry. Lorem Ipsum
-                    has been the industry's standard dummy text ever since the
-1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a type
-specimen book.`,
+		description:
+			'Lorem Ipsum is simply dummy text of the printing and ' +
+			"typesetting industry. Lorem Ipsum has been the industry's " +
+			'standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it ' +
+			'to make a type specimen book.',
 		creationDate: '10/11/2020',
 		duration: 210,
 		authors: [
@@ -60,40 +53,3 @@ export const mockedAuthorsList = [
 ];
 
 export const ADMIN = 'admin';
-
-export const mockedState = {
-	user: {
-		isAuth: true,
-		name: 'Test Name',
-		role: 'admin',
-	},
-	courses: {
-		items: mockedCoursesList,
-	},
-	authors: {
-		items: mockedAuthorsList,
-	},
-};
-
-export const mockedStore = {
-	getState: () => mockedState,
-	subscribe: jest.fn(),
-	dispatch: jest.fn(),
-};
-
-export const renderTestHelper = (
-	component,
-	state = mockedState,
-	initialPath = ''
-) => {
-	mockedStore.getState = () => ({
-		...mockedState,
-		...state,
-	});
-
-	return render(
-		<Provider store={mockedStore}>
-			<MemoryRouter initialEntries={[initialPath]}>{component}</MemoryRouter>
-		</Provider>
-	);
-};
