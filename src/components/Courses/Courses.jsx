@@ -24,16 +24,18 @@ export const Courses = () => {
 					</Button>
 				) : null}
 			</div>
-			{coursesList
-				.filter(
-					(course) =>
-						course.title.toLowerCase().search(search) !== -1 ||
-						course.id.search(search) !== -1
-				)
+			<div>
+				{coursesList
+					.filter(
+						(course) =>
+							course.title.toLowerCase().search(search) !== -1 ||
+							course.id.search(search) !== -1
+					)
 
-				.map((course) => (
-					<CourseCard course={course} key={course.id} />
-				))}
+					.map((course) => (
+						<CourseCard course={course} key={course.id} />
+					))}
+			</div>
 		</div>
 	);
 };

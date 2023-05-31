@@ -63,7 +63,7 @@ export const CourseCard = ({ course }) => {
 	};
 
 	return (
-		<div>
+		<div data-testid='course-card'>
 			<div className={styles.card}>
 				<div>
 					<h2 className={styles.h2}>{course.title}</h2>
