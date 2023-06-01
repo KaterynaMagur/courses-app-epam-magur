@@ -9,7 +9,7 @@ import {
 
 jest.mock('axios');
 
-describe('check render header', () => {
+describe('check render courseCard', () => {
 	beforeEach(() => {
 		axios.get.mockResolvedValue({ data: {} });
 	});

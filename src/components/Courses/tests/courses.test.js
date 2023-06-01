@@ -8,7 +8,7 @@ import { ADD_NEW_COURSE_BUTTON } from '../../../constants';
 
 jest.mock('axios');
 
-describe('check render header', () => {
+describe('check render courses', () => {
 	beforeEach(() => {
 		axios.get.mockResolvedValue({ data: {} });
 	});
