@@ -6,6 +6,7 @@ import {
 	mockedState,
 	renderTestHelper,
 } from '../../../../../tests/renderTestHelper';
+import { transformDate } from '../../../../../helpers/dateGeneratop';
 
 jest.mock('axios');
 
@@ -33,7 +34,7 @@ describe('check render courseCard', () => {
 
 	it('display duration in the correct format', () => {
 		renderTestHelper(<CourseCard course={course} />);
-		expect(screen.getByText(course.duration)).toBeInTheDocument();
+		expect(screen.getByText('03 : 30 hours')).toBeInTheDocument();
 	});
 
 	it('display authors list', () => {
@@ -43,6 +44,8 @@ describe('check render courseCard', () => {
 
 	it('display created date', () => {
 		renderTestHelper(<CourseCard course={course} />);
-		expect(screen.getByText(course.creationDate)).toBeInTheDocument();
+		expect(
+			screen.getByText(transformDate(course.creationDate))
+		).toBeInTheDocument();
 	});
 });

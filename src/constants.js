@@ -54,3 +54,5 @@ export const mockedAuthorsList = [
 
 export const ADMIN = 'admin';
 export const ADD_NEW_COURSE_BUTTON = 'Add new course';
+
+export const MINUTES_ONE_HOUR = 60;
