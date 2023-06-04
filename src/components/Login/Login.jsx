@@ -1,12 +1,13 @@
 import { Input } from '../../common/Input/Input';
 import { Button } from '../../common/Button/Button';
 import styles from './Login.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { api } from '../../servisces';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../../store/user/actionCreators';
+import { loginUser } from '../../store/user/thunk';
+import { selectUser } from '../../store';
 
 const initialState = {
 	name: '',
@@ -18,6 +19,13 @@ export const Login = () => {
 	const [form, setForm] = useState(initialState);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const currentUser = useSelector(selectUser);
+
+	useEffect(() => {
+		if (currentUser.isAuth) {
+			navigate('/courses');
+		}
+	}, [currentUser, navigate]);
 
 	const handleInputChange = ({ target: { value, name } }) => {
 		setForm({ ...form, [name]: value });
@@ -27,23 +35,7 @@ export const Login = () => {
 		e.preventDefault();
 
 		const { email, password } = form;
-		api.user
-			.login(email, password)
-			.then((res) => {
-				localStorage.setItem('token', JSON.stringify(res.data.result));
-				const userData = {
-					...res.data.user,
-					token: res.data.result,
-				};
-				localStorage.setItem('userData', JSON.stringify(userData));
-
-				dispatch(setUser(userData));
-				navigate('/courses');
-			})
-			.catch((err) => {
-				const errors = err?.response?.data?.errors?.join(', ');
-				alert(errors || 'Something went wrong');
-			});
+		dispatch(loginUser(email, password));
 	};
 
 	return (
