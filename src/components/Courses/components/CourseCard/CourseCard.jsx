@@ -4,8 +4,10 @@ import styles from './CourseCard.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAuthors, selectUser } from '../../../../store';
-import { ADMIN } from '../../../../constants';
+import { ADMIN, MINUTES_ONE_HOUR } from '../../../../constants';
 import { deleteCourseThunk } from '../../../../store/courses/thunk';
+import { transformDate } from '../../../../helpers/dateGeneratop';
+import { padTo2Digits } from '../../../../helpers/pipeDuration';
 
 const AdminButtons = ({ course }) => {
 	const dispatch = useDispatch();
@@ -63,7 +65,7 @@ export const CourseCard = ({ course }) => {
 	};
 
 	return (
-		<div>
+		<div data-testid='course-card'>
 			<div className={styles.card}>
 				<div>
 					<h2 className={styles.h2}>{course.title}</h2>
@@ -76,11 +78,13 @@ export const CourseCard = ({ course }) => {
 					</div>
 					<div>
 						<span className='typography--bold'>Duration: </span>
-						{course.duration}
+						{padTo2Digits(
+							Math.floor(course.duration / MINUTES_ONE_HOUR)
+						)} : {padTo2Digits(course.duration % MINUTES_ONE_HOUR) + ' hours'}
 					</div>
 					<div>
 						<span className='typography--bold'>Created: </span>
-						{course.creationDate}
+						{transformDate(course.creationDate)}
 					</div>
 					<div className={styles.buttonsWrapper}>
 						<div className={styles.button}>

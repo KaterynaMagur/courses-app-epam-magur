@@ -20,12 +20,11 @@ typesetting, remaining essentially unchanged.`,
 	{
 		id: 'b5630fdd-7bf7-4d39-b75a-2b5906fd0916',
 		title: 'Angular',
-		description: `Lorem Ipsum is simply dummy text of the printing and
-typesetting industry. Lorem Ipsum
-                    has been the industry's standard dummy text ever since the
-1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a type
-specimen book.`,
+		description:
+			'Lorem Ipsum is simply dummy text of the printing and ' +
+			"typesetting industry. Lorem Ipsum has been the industry's " +
+			'standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it ' +
+			'to make a type specimen book.',
 		creationDate: '10/11/2020',
 		duration: 210,
 		authors: [
@@ -54,3 +53,6 @@ export const mockedAuthorsList = [
 ];
 
 export const ADMIN = 'admin';
+export const ADD_NEW_COURSE_BUTTON = 'Add new course';
+
+export const MINUTES_ONE_HOUR = 60;

@@ -6,7 +6,7 @@ import {
 	updateCourse,
 } from './actionCreators';
 
-const initialState = [];
+export const initialState = [];
 export const coursesReducer = createReducer(initialState, (builder) => {
 	builder
 		.addCase(setCourses, (state, action) => {

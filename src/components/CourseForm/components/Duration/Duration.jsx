@@ -3,8 +3,7 @@ import styles from '../../CourseForm.module.scss';
 import { Input } from '../../../../common/Input/Input';
 
 import { padTo2Digits } from '../../../../helpers/pipeDuration';
-
-const MINUTES_ONE_HOUR = 60;
+import { MINUTES_ONE_HOUR } from '../../../../constants';
 
 export const Duration = ({ onMinutesChange, minutes }) => {
 	const handleInputChange = ({ target: { value } }) => {
