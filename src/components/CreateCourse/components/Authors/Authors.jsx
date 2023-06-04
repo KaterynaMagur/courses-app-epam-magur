@@ -1,7 +1,11 @@
 import { Button } from '../../../../common/Button/Button';
 import styles from '../../CreateCourse.module.scss';
+import { useSelector } from 'react-redux';
+import { selectAuthors } from '../../../../store';
 
-export const Authors = ({ addAuthor, selectedAuthors, authorsList }) => {
+export const Authors = ({ addAuthor, selectedAuthors }) => {
+	const authorsList = useSelector(selectAuthors);
+
 	return (
 		<div>
 			<h3>Authors</h3>

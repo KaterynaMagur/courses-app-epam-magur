@@ -4,6 +4,8 @@ export const Button = ({
 	primary,
 	secondary,
 	small,
+	superSmall,
+	disabled,
 	onClick,
 	children,
 	type,
@@ -18,8 +20,16 @@ export const Button = ({
 	if (small) {
 		combined.push(styles.small);
 	}
+	if (superSmall) {
+		combined.push(styles.superSmall);
+	}
 	return (
-		<button className={combined.join(' ')} onClick={onClick} type={type}>
+		<button
+			disabled={disabled}
+			className={combined.join(' ')}
+			onClick={onClick}
+			type={type}
+		>
 			{children}
 		</button>
 	);

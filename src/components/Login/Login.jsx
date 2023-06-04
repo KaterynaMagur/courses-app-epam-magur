@@ -4,6 +4,9 @@ import styles from './Login.module.scss';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { api } from '../../servisces';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../store/user/actionCreators';
 
 const initialState = {
 	name: '',
@@ -14,6 +17,7 @@ const initialState = {
 export const Login = () => {
 	const [form, setForm] = useState(initialState);
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const handleInputChange = ({ target: { value, name } }) => {
 		setForm({ ...form, [name]: value });
@@ -22,16 +26,18 @@ export const Login = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		const { name, email, password } = form;
-		axios
-			.post('/login', {
-				name,
-				email,
-				password,
-			})
+		const { email, password } = form;
+		api.user
+			.login(email, password)
 			.then((res) => {
 				localStorage.setItem('token', JSON.stringify(res.data.result));
-				localStorage.setItem('name', JSON.stringify(res.data.user.name));
+				const userData = {
+					...res.data.user,
+					token: res.data.result,
+				};
+				localStorage.setItem('userData', JSON.stringify(userData));
+
+				dispatch(setUser(userData));
 				navigate('/courses');
 			})
 			.catch((err) => {
