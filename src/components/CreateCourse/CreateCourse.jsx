@@ -7,6 +7,7 @@ import { Authors } from './components/Authors/Authors';
 import { CourseAuthors } from './components/CourseAuthors/CourseAuthors';
 import { AddAuthor } from './components/AddAuthor/AddAuthor';
 import { Duration } from './components/Duration/Duration';
+import { useNavigate } from 'react-router-dom';
 
 export const CreateCourse = ({
 	authorsList,
@@ -17,6 +18,8 @@ export const CreateCourse = ({
 	const [minutes, setMinutes] = useState(0);
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
+
+	const navigate = useNavigate();
 
 	const clearState = useCallback(() => {
 		setTitle('');
@@ -50,6 +53,7 @@ export const CreateCourse = ({
 		}
 		createNewCourse(title, description, minutes, selectedAuthors);
 		clearState();
+		navigate('/courses');
 	};
 
 	return (

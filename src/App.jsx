@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Header } from './components/Header/Header';
 import { Courses } from './components/Courses/Courses';
 import { CreateCourse } from './components/CreateCourse/CreateCourse';
+import { DefaultPage } from './components/DefaultPage/DefaultPage';
 
 import { useState } from 'react';
 
@@ -11,6 +12,18 @@ import { mockedAuthorsList, mockedCoursesList } from './constants';
 import { getCurrentDate } from './helpers/dateGeneratop';
 
 import { Route, Routes } from 'react-router-dom';
+import { Registration } from './components/Registration/Registration';
+import { Login } from './components/Login/Login';
+import { CourseInfo } from './components/CourseInfo/CourseInfo';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'http://localhost:4000';
+axios.interceptors.request.use((config) => {
+	if (!['/login', '/register'].includes(config.url)) {
+		config.headers.Authorization = localStorage.getItem('token') || '';
+	}
+	return config;
+});
 
 const App = () => {
 	const [authorsList, setAuthors] = useState(mockedAuthorsList);
@@ -43,19 +56,32 @@ const App = () => {
 	return (
 		<div>
 			<Header />
-			{isNewCourseOpen ? (
-				<CreateCourse
-					createNewAuthor={createNewAuthor}
-					createNewCourse={createNewCourse}
-					authorsList={authorsList}
-				/>
-			) : (
-				<Courses
-					onAddNewCourse={() => setNewCourseOpen(true)}
-					authorsList={authorsList}
-					coursesList={coursesList}
-				/>
-			)}
+			<Routes>
+				<Route
+					path='/courses'
+					element={
+						<Courses
+							onAddNewCourse={() => setNewCourseOpen(true)}
+							authorsList={authorsList}
+							coursesList={coursesList}
+						/>
+					}
+				></Route>
+				<Route
+					path='/courses/add'
+					element={
+						<CreateCourse
+							createNewAuthor={createNewAuthor}
+							createNewCourse={createNewCourse}
+							authorsList={authorsList}
+						/>
+					}
+				></Route>
+				<Route path='/registration' element={<Registration />}></Route>
+				<Route path='/login' element={<Login />}></Route>
+				<Route path='/courses/:courseId' element={<CourseInfo />}></Route>
+				<Route path='*' element={<DefaultPage />} />
+			</Routes>
 		</div>
 	);
 };
